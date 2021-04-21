@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "allowJs": false,
+        "declaration": true,
+        "esModuleInterop": false,
+        "forceConsistentCasingInFileNames": true,
+        "isolatedModules": true,
+        "jsx": "react",
+        "lib": ["dom", "esnext"],
+        "module": "esnext",
+        "moduleResolution": "node",
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "outDir": "./dist/types",
+        "skipLibCheck": false,
+        "strict": true,
+        "target": "es5",
+        "types": ["node", "vite/client"]
+    },
+    "include": ["src/**/*"]
+}

@@ -1,0 +1,13 @@
+{
+    "eslint.autoFixOnSave": true,
+    "eslint.probe": [
+        "css",
+        "javascript",
+        "javascriptreact",
+        "json",
+        "markdown",
+        "typescript",
+        "typescriptreact"
+    ],
+    "eslint.packageManager": "yarn"
+}

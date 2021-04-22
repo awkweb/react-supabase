@@ -1,2 +1,2 @@
 export { Consumer, Context, Provider, useClient } from './context'
-export { useSelect } from './hooks'
+export { useFilter, useSelect } from './hooks'

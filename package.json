@@ -12,15 +12,12 @@
     "license": "MIT",
     "scripts": {
         "build": "vite build && tsc --emitDeclarationOnly",
-        "build:watch": "vite build --watch",
+        "build:watch": "concurrently \"vite build --watch\" \"tsc --emitDeclarationOnly --watch\"",
         "clean": "rimraf dist",
-        "dev": "vite",
-        "gen": "npx openapi-typescript $VITE_SUPABASE_URL/rest/v1/?apikey=$VITE_SUPABASE_KEY --output playground/types/supabase.ts",
         "lint": "eslint . --cache",
         "lint:fix": "yarn lint --fix",
         "lint:format": "prettier --write .",
         "lint:types": "tsc --noEmit",
-        "predev": "yarn gen",
         "prepare": "husky install .config/husky"
     },
     "peerDependencies": {
@@ -36,6 +33,7 @@
         "@types/react": "^17.0.3",
         "@typescript-eslint/eslint-plugin": "^4.22.0",
         "@typescript-eslint/parser": "^4.22.0",
+        "concurrently": "^6.0.2",
         "eslint": "^7.24.0",
         "eslint-config-prettier": "^8.2.0",
         "eslint-import-resolver-typescript": "^2.4.0",
@@ -53,5 +51,6 @@
         "rimraf": "^3.0.2",
         "typescript": "^4.2.4",
         "vite": "^2.2.1"
-    }
+    },
+    "dependencies": {}
 }

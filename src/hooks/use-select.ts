@@ -1,68 +1,75 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { PostgrestFilterBuilder } from '@supabase/postgrest-js'
 
 import { useClient } from '../context'
-import { PostgrestError } from '../types'
+import { Filter, PostgrestError } from '../types'
+import { initialState } from './state'
 
 export type UseSelectArgs<Data = any> = {
     columns?: string
-    filter?:
-        | ((
-              query: PostgrestFilterBuilder<Data>,
-          ) => PostgrestFilterBuilder<Data>)
-        | false
-        | null
+    filter?: Filter<Data> | false | null
     lazy?: boolean
     options?: {
         head?: boolean
         count?: null | 'exact' | 'planned' | 'estimated'
     }
+    single?: boolean
     table: string
 }
 
 export type UseSelectState<Data = any> = {
     fetching: boolean
-    data?: Data | null
+    data?: Data | Data[] | null
     error?: PostgrestError | null
 }
 
-export type UseSelectResponse<Data = any> = [UseSelectState<Data>, () => void]
+export type UseSelectResponse<Data = any> = [
+    UseSelectState<Data>,
+    () => Promise<Pick<UseSelectState<Data>, 'data' | 'error'>>,
+]
 
-export function useSelect<Data = any>(
-    args: UseSelectArgs<Data>,
-): UseSelectResponse<Data> {
-    const { columns = '*', filter, lazy, options = {}, table } = args
+export function useSelect<Data = any>({
+    columns = '*',
+    filter,
+    lazy,
+    options = {},
+    single,
+    table,
+}: UseSelectArgs<Data>): UseSelectResponse<Data> {
     const client = useClient()
-    const mountedRef = useRef(false)
-    const [state, setState] = useState<UseSelectState>({ fetching: false })
+    const isMounted = useRef(false)
+    const [state, setState] = useState<UseSelectState>(initialState)
 
+    /* eslint-disable react-hooks/exhaustive-deps */
     const source = useMemo(() => {
         const source = client.from<Data>(table).select(columns, options)
-        return filter ? filter(source) : source
-    }, [client, columns, filter, options, table])
+        const filtered = filter ? filter(source) : source
+        return single ? filtered.single() : filtered
+    }, [client, filter])
+    /* eslint-enable react-hooks/exhaustive-deps */
 
     const execute = useCallback(async () => {
-        setState((x) => ({ ...x, fetching: true }))
+        setState({ ...initialState, fetching: true })
         const { data, error } = await source
-        setState({ data, error, fetching: false })
+        if (isMounted.current) {
+            setState({ data, error, fetching: false })
+        }
+        return { data, error }
     }, [source])
 
-    // Run when filter changes
     /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
-        if (!mountedRef.current) return
+        if (!isMounted.current) return
         execute()
     }, [filter])
     /* eslint-enable react-hooks/exhaustive-deps */
 
-    // Run on mount
     /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
-        mountedRef.current = true
+        isMounted.current = true
         if (lazy) return
         execute()
         return () => {
-            mountedRef.current = false
+            isMounted.current = false
         }
     }, [])
     /* eslint-enable react-hooks/exhaustive-deps */

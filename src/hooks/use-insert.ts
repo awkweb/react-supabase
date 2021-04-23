@@ -15,9 +15,10 @@ export type UseInsertArgs = {
 }
 
 export type UseInsertState<Data = any> = {
-    fetching: boolean
+    count?: number | null
     data?: Data | Data[] | null
     error?: PostgrestError | null
+    fetching: boolean
 }
 
 export type UseInsertResponse<Data = any> = [
@@ -25,7 +26,7 @@ export type UseInsertResponse<Data = any> = [
     (
         values: Partial<Data>[],
         options?: UseInsertOptions,
-    ) => Promise<Pick<UseInsertState<Data>, 'data' | 'error'>>,
+    ) => Promise<Pick<UseInsertState<Data>, 'count' | 'data' | 'error'>>,
 ]
 
 export function useInsert<Data = any>(
@@ -39,13 +40,13 @@ export function useInsert<Data = any>(
     const execute = useCallback(
         async (values: Partial<Data>[], options?: UseInsertOptions) => {
             setState({ ...initialState, fetching: true })
-            const { data, error } = await client
+            const { count, data, error } = await client
                 .from<Data>(args.table)
                 .insert(values, options ?? args.options)
             if (isMounted.current) {
                 setState({ data, error, fetching: false })
             }
-            return { data, error }
+            return { count, data, error }
         },
         [client],
     )

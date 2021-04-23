@@ -17,14 +17,15 @@ export type UseSelectArgs<Data = any> = {
 }
 
 export type UseSelectState<Data = any> = {
-    fetching: boolean
-    data?: Data | Data[] | null
+    count?: number | null
+    data?: Data[] | null
     error?: PostgrestError | null
+    fetching: boolean
 }
 
 export type UseSelectResponse<Data = any> = [
     UseSelectState<Data>,
-    () => Promise<Pick<UseSelectState<Data>, 'data' | 'error'>>,
+    () => Promise<Pick<UseSelectState<Data>, 'count' | 'data' | 'error'>>,
 ]
 
 export function useSelect<Data = any>({
@@ -32,7 +33,6 @@ export function useSelect<Data = any>({
     filter,
     lazy,
     options = {},
-    single,
     table,
 }: UseSelectArgs<Data>): UseSelectResponse<Data> {
     const client = useClient()
@@ -42,18 +42,17 @@ export function useSelect<Data = any>({
     /* eslint-disable react-hooks/exhaustive-deps */
     const source = useMemo(() => {
         const source = client.from<Data>(table).select(columns, options)
-        const filtered = filter ? filter(source) : source
-        return single ? filtered.single() : filtered
+        return filter ? filter(source) : source
     }, [client, filter])
     /* eslint-enable react-hooks/exhaustive-deps */
 
     const execute = useCallback(async () => {
         setState({ ...initialState, fetching: true })
-        const { data, error } = await source
+        const { count, data, error } = await source
         if (isMounted.current) {
-            setState({ data, error, fetching: false })
+            setState({ count, data, error, fetching: false })
         }
-        return { data, error }
+        return { count, data, error }
     }, [source])
 
     /* eslint-disable react-hooks/exhaustive-deps */

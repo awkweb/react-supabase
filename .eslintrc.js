@@ -10,7 +10,7 @@ module.exports = {
         },
         allowImportExportEverywhere: true,
     },
-    plugins: ['@typescript-eslint', 'import'],
+    plugins: ['@typescript-eslint', 'import', 'testing-library'],
     extends: [
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
@@ -52,6 +52,9 @@ module.exports = {
                 ignoreMemberSort: false,
             },
         ],
+        // `eslint-plugin-react`
+        // https://github.com/yannickcr/eslint-plugin-react
+        'react/prop-types': 'off',
     },
     settings: {
         'import/parsers': {

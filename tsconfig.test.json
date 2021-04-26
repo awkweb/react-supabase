@@ -1,25 +1,18 @@
 {
     "compilerOptions": {
-        "allowJs": false,
-        "declaration": true,
         "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true,
-        "isolatedModules": true,
-        "lib": ["dom", "esnext"],
+        "jsx": "react",
+        "lib": ["esnext", "dom"],
         "module": "commonjs",
         "moduleResolution": "node",
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "outDir": "./dist/types",
-        "resolveJsonModule": true,
-        "skipLibCheck": false,
-        "strict": true,
         "target": "es5",
-        "types": ["node", "jest", "vite/client"]
+        "types": ["node", "jest"]
     },
-    "include": ["src/**/*"],
+    "include": ["./jest-setup.ts", "src/**/*"],
     "watchOptions": {
         "watchFile": "useFsEvents",
         "watchDirectory": "useFsEvents",

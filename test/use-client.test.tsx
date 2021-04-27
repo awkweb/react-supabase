@@ -1,10 +1,7 @@
-import React from 'react'
-import { createClient } from '@supabase/supabase-js'
 import { renderHook } from '@testing-library/react-hooks'
 
-import { Provider, useClient } from '../src'
-
-const client = createClient('https://example.com', 'some.fake.key')
+import { useClient } from '../src'
+import { Wrapper as wrapper } from './utils'
 
 describe('useClient', () => {
     it('should throw when not inside Provider', () => {
@@ -15,9 +12,6 @@ describe('useClient', () => {
     })
 
     it('should return client', () => {
-        const wrapper = ({ children }) => (
-            <Provider value={client}>{children}</Provider>
-        )
         const { result } = renderHook(() => useClient(), { wrapper })
         expect(Object.keys(result.current)).toEqual([
             'supabaseUrl',

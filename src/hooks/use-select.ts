@@ -9,6 +9,7 @@ export type UseSelectState<Data = any> = {
     data?: Data[] | null
     error?: PostgrestError | null
     fetching: boolean
+    stale: boolean
 }
 
 export type UseSelectResponse<Data = any> = [
@@ -34,7 +35,10 @@ export function useSelect<Data = any>(
 ): UseSelectResponse<Data> {
     const client = useClient()
     const isMounted = useRef(false)
-    const [state, setState] = useState<UseSelectState>(initialState)
+    const [state, setState] = useState<UseSelectState>({
+        ...initialState,
+        stale: false,
+    })
 
     const source = useMemo(() => {
         const { columns, filter, options } = config
@@ -43,10 +47,17 @@ export function useSelect<Data = any>(
     }, [client, config, table])
 
     const execute = useCallback(async () => {
-        setState({ ...initialState, fetching: true })
+        setState((x) => ({
+            ...initialState,
+            ...x,
+            fetching: true,
+            stale: true,
+        }))
         const { count, data, error } = await source
-        if (isMounted.current) setState({ count, data, error, fetching: false })
-        return { count, data, error }
+        const res = { count, data, error }
+        if (isMounted.current)
+            setState({ ...res, fetching: false, stale: false })
+        return res
     }, [source])
 
     /* eslint-disable react-hooks/exhaustive-deps */

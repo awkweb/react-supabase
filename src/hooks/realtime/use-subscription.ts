@@ -4,7 +4,7 @@ import {
     SupabaseRealtimePayload,
 } from '@supabase/supabase-js/dist/main/lib/types'
 
-import { useClient } from './use-client'
+import { useClient } from '../use-client'
 
 export type UseSubscriptionConfig = {
     event?: SupabaseEventTypes

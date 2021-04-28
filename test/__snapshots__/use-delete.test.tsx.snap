@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useDelete should throw when filter not provided to execute 1`] = `"delete() should always be combined with \`filter\`"`;
+
+exports[`useDelete should throw when not inside Provider 1`] = `"No client has been specified using Provider."`;

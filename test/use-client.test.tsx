@@ -6,9 +6,7 @@ import { Wrapper as wrapper } from './utils'
 describe('useClient', () => {
     it('should throw when not inside Provider', () => {
         const { result } = renderHook(() => useClient())
-        expect(result.error).toEqual(
-            Error('No client has been specified using Provider.'),
-        )
+        expect(() => result.current).toThrowErrorMatchingSnapshot()
     })
 
     it('should return client', () => {

@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 
-import { Filter } from '../types'
+import { Filter } from '../../types'
 
 export function useFilter<Data = any>(filter: Filter<Data>, deps: any[] = []) {
     /* eslint-disable react-hooks/exhaustive-deps */

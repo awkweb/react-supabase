@@ -5,8 +5,6 @@ import { useInsert } from '../src'
 describe('useInsert', () => {
     it('should throw when not inside Provider', () => {
         const { result } = renderHook(() => useInsert('todos'))
-        expect(result.error).toEqual(
-            Error('No client has been specified using Provider.'),
-        )
+        expect(() => result.current).toThrowErrorMatchingSnapshot()
     })
 })

@@ -1,45 +1,50 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { Count, Filter, PostgrestError, Returning } from '../types'
-import { useClient } from './use-client'
-import { initialState } from './state'
+import { Count, Filter, PostgrestError, Returning } from '../../types'
+import { initialState } from '../state'
+import { useClient } from '../use-client'
 
-export type UseDeleteState<Data = any> = {
+export type UseUpdateState<Data = any> = {
     count?: number | null
     data?: Data | Data[] | null
     error?: PostgrestError | null
     fetching: boolean
 }
 
-export type UseDeleteResponse<Data = any> = [
-    UseDeleteState<Data>,
+export type UseUpdateResponse<Data = any> = [
+    UseUpdateState<Data>,
     (
-        filter: Filter<Data>,
-        options?: UseDeleteOptions,
-    ) => Promise<Pick<UseDeleteState<Data>, 'count' | 'data' | 'error'>>,
+        values: Partial<Data>,
+        filter?: Filter<Data>,
+        options?: UseUpdateOptions,
+    ) => Promise<Pick<UseUpdateState<Data>, 'count' | 'data' | 'error'>>,
 ]
 
-export type UseDeleteOptions = {
+export type UseUpdateOptions = {
     returning?: Returning
     count?: null | Count
 }
 
-export type UseDeleteConfig<Data = any> = {
+export type UseUpdateConfig<Data = any> = {
     filter?: Filter<Data>
-    options?: UseDeleteOptions
+    options?: UseUpdateOptions
 }
 
-export function useDelete<Data = any>(
+export function useUpdate<Data = any>(
     table: string,
-    config: UseDeleteConfig<Data> = { options: {} },
-): UseDeleteResponse<Data> {
+    config: UseUpdateConfig<Data> = { options: {} },
+): UseUpdateResponse<Data> {
     const client = useClient()
     const isMounted = useRef(false)
-    const [state, setState] = useState<UseDeleteState>(initialState)
+    const [state, setState] = useState<UseUpdateState>(initialState)
 
     /* eslint-disable react-hooks/exhaustive-deps */
     const execute = useCallback(
-        async (filter?: Filter<Data>, options?: UseDeleteOptions) => {
+        async (
+            values: Partial<Data>,
+            filter?: Filter<Data>,
+            options?: UseUpdateOptions,
+        ) => {
             const refine = filter ?? config.filter
             if (refine === undefined)
                 throw Error('update() should always be combined with `filter`')
@@ -47,7 +52,7 @@ export function useDelete<Data = any>(
             setState({ ...initialState, fetching: true })
             const source = client
                 .from<Data>(table)
-                .delete(options ?? config.options)
+                .update(values, options ?? config.options)
             const { count, data, error } = await refine(source)
 
             const res = { count, data, error }

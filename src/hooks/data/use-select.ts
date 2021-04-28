@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
-import { Count, Filter, PostgrestError } from '../types'
-import { useClient } from './use-client'
-import { initialState } from './state'
+import { Count, Filter, PostgrestError } from '../../types'
+import { initialState } from '../state'
+import { useClient } from '../use-client'
 
 export type UseSelectState<Data = any> = {
     count?: number | null

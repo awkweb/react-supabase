@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
-import { Filter, PostgrestError } from '../types'
+import { Count, Filter, PostgrestError } from '../types'
 import { useClient } from './use-client'
 import { initialState } from './state'
 
@@ -18,7 +18,7 @@ export type UseSelectResponse<Data = any> = [
 
 export type UseSelectOptions = {
     head?: boolean
-    count?: null | 'exact' | 'planned' | 'estimated'
+    count?: null | Count
 }
 
 export type UseSelectConfig<Data = any> = {
@@ -45,8 +45,9 @@ export function useSelect<Data = any>(
     const execute = useCallback(async () => {
         setState({ ...initialState, fetching: true })
         const { count, data, error } = await source
-        if (isMounted.current) setState({ count, data, error, fetching: false })
-        return { count, data, error }
+        const res = { count, data, error }
+        if (isMounted.current) setState({ ...res, fetching: false })
+        return res
     }, [source])
 
     /* eslint-disable react-hooks/exhaustive-deps */

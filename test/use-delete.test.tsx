@@ -1,10 +1,10 @@
 import { renderHook } from '@testing-library/react-hooks'
 
-import { useInsert } from '../src'
+import { useDelete } from '../src'
 
-describe('useInsert', () => {
+describe('useDelete', () => {
     it('should throw when not inside Provider', () => {
-        const { result } = renderHook(() => useInsert('todos'))
+        const { result } = renderHook(() => useDelete('todos'))
         expect(result.error).toEqual(
             Error('No client has been specified using Provider.'),
         )

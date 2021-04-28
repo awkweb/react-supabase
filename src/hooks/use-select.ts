@@ -25,7 +25,6 @@ export type UseSelectConfig<Data = any> = {
     columns?: string
     filter?: Filter<Data> | false | null
     options?: UseSelectOptions
-    single?: boolean
 }
 
 export function useSelect<Data = any>(

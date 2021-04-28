@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { PostgrestError } from '../types'
+import { Count, PostgrestError, Returning } from '../types'
 import { useClient } from './use-client'
 import { initialState } from './state'
 
@@ -20,8 +20,8 @@ export type UseInsertResponse<Data = any> = [
 ]
 
 export type UseInsertOptions = {
-    returning?: 'minimal' | 'representation'
-    count?: null | 'exact' | 'planned' | 'estimated'
+    returning?: Returning
+    count?: null | Count
 }
 
 export type UseInsertConfig = {
@@ -46,8 +46,9 @@ export function useInsert<Data = any>(
             const { count, data, error } = await client
                 .from<Data>(table)
                 .insert(values, options ?? config.options)
-            if (isMounted.current) setState({ data, error, fetching: false })
-            return { count, data, error }
+            const res = { count, data, error }
+            if (isMounted.current) setState({ ...res, fetching: false })
+            return res
         },
         [client],
     )

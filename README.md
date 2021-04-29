@@ -4,18 +4,55 @@
 
 <br/>
 
+## Installation
+
+Inside your React project directory, install:
+
+```
+yarn add react-supabase @supabase/supabase-js
+# or
+npm install --save react-supabase @supabase/supabase-js
+```
+
+<br/>
+
 ## Usage
 
-Inside your React project directory, run the following:
+Create a Supabase client and pass it to the `Provider`:
 
-```
-yarn add react-supabase
+```js
+import { createClient } from '@supabase/supabase-js'
+import { Provider } from 'react-supabase'
+
+const client = createClient('https://xyzcompany.supabase.co', 'public-anon-key')
+
+const App = () => (
+  <Provider value={client}>
+    <YourRoutes />
+  </Provider>
+)
 ```
 
-Or with npm:
+Now every component and element inside and under the `Provider` can use the Supabase client:
 
-```
-npm install react-supabase
+```js
+import { useSelect } from 'react-supabase'
+
+const Todos = () => {
+  const [result, reexecuteSelect] = useSelect('todos')
+
+  const { data, fetching, error } = result
+
+  if (fetching) return <p>Loading...</p>
+  if (error) return <p>Oh no... {error.message}</p>
+  return (
+    <ul>
+      {data.map((todo) => (
+        <li key={todo.id}>{todo.title}</li>
+      ))}
+    </ul>
+  )
+}
 ```
 
 <br/>

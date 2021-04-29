@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { Count, Filter, PostgrestError, Returning } from '../../types'
-import { initialState } from '../state'
 import { useClient } from '../use-client'
+import { initialState } from './state'
 
 export type UseDeleteState<Data = any> = {
     count?: number | null

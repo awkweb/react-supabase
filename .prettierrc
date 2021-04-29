@@ -8,6 +8,12 @@
     "trailingComma": "all",
     "overrides": [
         {
+            "files": "*.md",
+            "options": {
+                "tabWidth": 2
+            }
+        },
+        {
             "files": "*.yaml",
             "options": {
                 "tabWidth": 2

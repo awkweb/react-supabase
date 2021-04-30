@@ -1,8 +1,4 @@
-## Introduction
-
-`react-supabase` is a React Hooks library for [Supabase](https://supabase.io).
-
-<br/>
+# Getting Started
 
 ## Installation
 
@@ -12,9 +8,7 @@ yarn add react-supabase @supabase/supabase-js
 npm install --save react-supabase @supabase/supabase-js
 ```
 
-<br/>
-
-## Usage
+## Quick Start
 
 Create a Supabase client and pass it to the `Provider`:
 
@@ -52,9 +46,3 @@ const Todos = () => {
   )
 }
 ```
-
-<br/>
-
-## License
-
-The MIT License.

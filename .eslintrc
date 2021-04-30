@@ -35,6 +35,7 @@
                 "argsIgnorePattern": "^_"
             }
         ],
+        "@typescript-eslint/no-var-requires": "off",
         // `eslint-plugin-import`
         // https://github.com/benmosher/eslint-plugin-import
         "import/order": [

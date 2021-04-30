@@ -1,0 +1,7 @@
+{
+    "use-auth-state-change": "useAuthStateChange",
+    "use-reset-password": "useResetPassword",
+    "use-signin": "useSignIn",
+    "use-signout": "useSignOut",
+    "use-signup": "useSignUp"
+}

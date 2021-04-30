@@ -1,0 +1,6 @@
+{
+    "provider": "Provider",
+    "use-client": "useClient",
+    "auth": "Auth",
+    "data": "Data"
+}

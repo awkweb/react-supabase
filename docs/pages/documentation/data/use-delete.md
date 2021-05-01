@@ -2,7 +2,7 @@
 
 Performs a DELETE on the table.
 
-```js
+```js highlight=4,5,6,7,8,9,10,11,12,13,14
 import { useDelete } from 'react-supabase'
 
 function Page() {
@@ -32,3 +32,5 @@ function Page() {
   return ...
 }
 ```
+
+Throws error during execute if `filter` is not passed during hook initialization or execute method directly.

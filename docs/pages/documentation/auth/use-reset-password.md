@@ -2,7 +2,7 @@
 
 Sends reset request to email address.
 
-```js
+```js highlight=4,5,6,7,8,9
 import { useResetPassword } from 'react-supabase'
 
 function Page() {

@@ -2,7 +2,7 @@
 
 Log in existing user, or login via a third-party provider.
 
-```js
+```js highlight=4,5,6,7,8,9
 import { useSignIn } from 'react-supabase'
 
 function Page() {

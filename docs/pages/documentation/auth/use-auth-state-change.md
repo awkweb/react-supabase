@@ -2,7 +2,7 @@
 
 Receive a notification every time an auth event happens. Composed in the [User Context example](/documentation/recipes/user-context).
 
-```js
+```js highlight=4,5,6
 import { useAuthStateChange } from 'react-supabase'
 
 function Page() {

@@ -2,7 +2,7 @@
 
 Creates new user.
 
-```js
+```js highlight=4,5,6,7,8,9
 import { useSignUp } from 'react-supabase'
 
 function Page() {

@@ -3,9 +3,11 @@
     "version": "1.0.0",
     "main": "index.js",
     "license": "MIT",
+    "private": true,
     "scripts": {
         "dev": "next dev",
-        "build": "next build"
+        "build": "STORK_PATH=$(pwd)/bin/stork.bin next build",
+        "start": "next start"
     },
     "dependencies": {
         "next": "^10.2.0",

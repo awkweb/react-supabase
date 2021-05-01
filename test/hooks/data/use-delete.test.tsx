@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks'
 
-import { useDelete } from '../src'
-import { Wrapper as wrapper } from './utils'
+import { useDelete } from '../../../src'
+import { Wrapper as wrapper } from '../../utils'
 
 describe('useDelete', () => {
     it('should throw when not inside Provider', () => {

@@ -1,10 +1,10 @@
 import { renderHook } from '@testing-library/react-hooks'
 
-import { useSignUp } from '../src'
+import { useInsert } from '../../../src'
 
-describe('useSignUp', () => {
+describe('useInsert', () => {
     it('should throw when not inside Provider', () => {
-        const { result } = renderHook(() => useSignUp())
+        const { result } = renderHook(() => useInsert('todos'))
         expect(() => result.current).toThrowErrorMatchingSnapshot()
     })
 })

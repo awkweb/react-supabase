@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks'
 
-import { useResetPassword } from '../src'
+import { useResetPassword } from '../../../src'
 
 describe('useResetPassword', () => {
     it('should throw when not inside Provider', () => {

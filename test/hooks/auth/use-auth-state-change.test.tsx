@@ -1,10 +1,10 @@
 import { renderHook } from '@testing-library/react-hooks'
 
-import { useSelect } from '../src'
+import { useAuthStateChange } from '../../../src'
 
-describe('useSelect', () => {
+describe('useAuthStateChange', () => {
     it('should throw when not inside Provider', () => {
-        const { result } = renderHook(() => useSelect('todos'))
+        const { result } = renderHook(() => useAuthStateChange(jest.fn()))
         expect(() => result.current).toThrowErrorMatchingSnapshot()
     })
 })

@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks'
 
-import { useUpdate } from '../src'
-import { Wrapper as wrapper } from './utils'
+import { useUpdate } from '../../../src'
+import { Wrapper as wrapper } from '../../utils'
 
 describe('useUpdate', () => {
     it('should throw when not inside Provider', () => {

@@ -1,10 +1,10 @@
 import { renderHook } from '@testing-library/react-hooks'
 
-import { useSubscription } from '../src'
+import { useSignUp } from '../../../src'
 
-describe('useSubscription', () => {
+describe('useSignUp', () => {
     it('should throw when not inside Provider', () => {
-        const { result } = renderHook(() => useSubscription(jest.fn()))
+        const { result } = renderHook(() => useSignUp())
         expect(() => result.current).toThrowErrorMatchingSnapshot()
     })
 })

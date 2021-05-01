@@ -1,3 +1,7 @@
 {
-    "use-delete": "useDelete"
+    "use-delete": "useDelete",
+    "use-filter": "useFilter",
+    "use-insert": "useInsert",
+    "use-select": "useSelect",
+    "use-update": "useUpdate"
 }

@@ -25,7 +25,7 @@ const App = () => (
 )
 ```
 
-Now every component inside and under the `Provider` can use the Supabase client:
+Now every component inside and under the `Provider` can use the Supabase client (`useClient`) and related hooks (`useSelect`, `useSignIn`, `useSubscription`, etc.):
 
 ```js
 import { useSelect } from 'react-supabase'

@@ -20,8 +20,8 @@ export type UseInsertResponse<Data = any> = [
 ]
 
 export type UseInsertOptions = {
-    returning?: Returning
     count?: null | Count
+    returning?: Returning
 }
 
 export type UseInsertConfig = {

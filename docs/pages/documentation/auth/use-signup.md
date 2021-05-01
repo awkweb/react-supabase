@@ -2,28 +2,17 @@
 
 Creates new user.
 
-```js highlight=4,5,6,7,8,9
+```js highlight=4
 import { useSignUp } from 'react-supabase'
 
 function Page() {
-  const [{ error, fetching, session, user }, signUp] = useSignUp({
-    // Passing optional options
-    options: {
-      redirectTo: 'https://example.com/dashboard',
-    },
-  })
+  const [{ error, fetching, session, user }, signUp] = useSignUp()
 
   async function onClickSignUp() {
-    const { error, session, user } = await signUp(
-      {
-        email: 'user@example.com',
-        password: 'foobarbaz',
-      },
-      {
-        // Override options from hook init
-        redirectTo: 'https://example.com/welcome',
-      },
-    )
+    const { error, session, user } = await signUp({
+      email: 'user@example.com',
+      password: 'foobarbaz',
+    })
   }
 
   if (error) return <div>Error signing up</div>
@@ -32,4 +21,30 @@ function Page() {
 
   return ...
 }
+```
+
+## Passing options
+
+During hook initialization:
+
+```js
+const [{ error, fetching, session, user }, signUp] = useSignUp({
+  options: {
+    redirectTo: 'https://example.com/dashboard',
+  },
+})
+```
+
+Or execute function:
+
+```js
+const { error, session, user } = await signUp(
+  {
+    email: 'user@example.com',
+    password: 'foobarbaz',
+  },
+  {
+    redirectTo: 'https://example.com/welcome',
+  },
+)
 ```

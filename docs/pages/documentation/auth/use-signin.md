@@ -2,28 +2,17 @@
 
 Log in existing user, or login via a third-party provider.
 
-```js highlight=4,5,6,7,8,9
+```js highlight=4
 import { useSignIn } from 'react-supabase'
 
 function Page() {
-  const [{ error, fetching, session, user }, signIn] = useSignIn({
-    // Passing optional options
-    options: {
-      redirectTo: 'https://example.com/dashboard',
-    },
-  })
+  const [{ error, fetching, session, user }, signIn] = useSignIn()
 
   async function onClickSignIn() {
-    const { error, session, user } = await signIn(
-      {
-        email: 'user@example.com',
-        password: 'foobarbaz',
-      },
-      {
-        // Override options from hook init
-        redirectTo: 'https://example.com/account',
-      },
-    )
+    const { error, session, user } = await signIn({
+      email: 'user@example.com',
+      password: 'foobarbaz',
+    })
   }
 
   if (error) return <div>Error signing in</div>
@@ -32,6 +21,32 @@ function Page() {
 
   return ...
 }
+```
+
+## Passing options
+
+During hook initialization:
+
+```js
+const [{ error, fetching, session, user }, signIn] = useSignIn({
+  options: {
+    redirectTo: 'https://example.com/dashboard',
+  },
+})
+```
+
+Or the execute function:
+
+```js
+const { error, session, user } = await signIn(
+  {
+    email: 'user@example.com',
+    password: 'foobarbaz',
+  },
+  {
+    redirectTo: 'https://example.com/account',
+  },
+)
 ```
 
 ## Magic links
@@ -55,7 +70,7 @@ const [{ error, fetching, user, session }, signIn] = useSignIn({
 })
 ```
 
-Or the execute function:
+Or execute function:
 
 ```js
 const { error, session, user } = await signIn(

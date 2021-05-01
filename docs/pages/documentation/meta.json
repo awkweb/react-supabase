@@ -4,5 +4,5 @@
     "auth": "Auth",
     "data": "Data",
     "realtime": "Realtime",
-    "recipes": "Recipes"
+    "storage": "Storage"
 }

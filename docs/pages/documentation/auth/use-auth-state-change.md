@@ -14,4 +14,4 @@ function Page() {
 }
 ```
 
-Note: Auth listener automatically cleaned up during [cleanup phase](https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup).
+Note: Auth listener is automatically cleaned up during the hook’s [cleanup phase](https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup).

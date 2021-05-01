@@ -1,33 +1,16 @@
 # useDelete
 
-Performs a DELETE on the table.
+Performs DELETE on table.
 
-```js highlight=4,5,6,7,8,9,10,11,12,13,14,15,16
+```js highlight=4
 import { useDelete } from 'react-supabase'
 
 function Page() {
-  const [
-    { count, data, error, fetching },
-    deleteTodos,
-  ] = useDelete(
-    'todos',
-    // Passing optional options
-    {
-      options: {
-        returning: 'represenation',
-        count: 'exact',
-      },
-    },
-  )
+  const [{ count, data, error, fetching }, deleteTodos] = useDelete('todos')
 
   async function onClickDelete(id) {
     const { count, data, error } = await deleteTodos(
       (query) => query.eq('id', id),
-      {
-        // Override options from hook init
-        returning: 'minimal',
-        count: 'estimated',
-      },
     )
   }
 
@@ -35,4 +18,30 @@ function Page() {
 }
 ```
 
-Throws error during execute if `filter` is not passed during hook initialization or execute method directly.
+Throws error during execute if a filter is not passed during hook initialization or execute method.
+
+## Passing options
+
+During hook initialization:
+
+```js
+const [{ count, data, error, fetching }, deleteTodos] = useDelete('todos', {
+  filter: (query) => query.eq('status', 'completed'),
+  options: {
+    returning: 'represenation',
+    count: 'exact',
+  },
+})
+```
+
+Or execute function:
+
+```js
+const { count, data, error } = await deleteTodos(
+  (query) => query.eq('id', id),
+  {
+    returning: 'minimal',
+    count: 'estimated',
+  },
+)
+```

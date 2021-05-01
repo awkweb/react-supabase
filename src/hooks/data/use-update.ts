@@ -21,8 +21,8 @@ export type UseUpdateResponse<Data = any> = [
 ]
 
 export type UseUpdateOptions = {
-    returning?: Returning
     count?: null | Count
+    returning?: Returning
 }
 
 export type UseUpdateConfig<Data = any> = {

@@ -1,33 +1,44 @@
 # useInsert
 
-Performs an INSERT into the table.
+Performs INSERT into table.
 
-```js highlight=4,5,6,7,8,9,10,11,12,13
+```js highlight=4
 import { useInsert } from 'react-supabase'
 
 function Page() {
-  const [{ count, data, error, fetching }, insertTodo] = useInsert(
-    'todos',
-    // Passing optional options
-    {
-      options: {
-        returning: 'represenation',
-        count: 'exact',
-      },
-    },
-  )
+  const [{ count, data, error, fetching }, insertTodos] = useInsert('todos')
 
-  async function onClickDelete(id) {
-    const { count, data, error } = await deleteTodos(
-      (query) => query.eq('id', id),
-      {
-        // Override options from hook init
-        returning: 'minimal',
-        count: 'estimated',
-      },
-    )
+  async function onClickInsert(name) {
+    const { count, data, error } = await insertTodos({
+      name,
+    })
   }
 
   return ...
 }
+```
+
+## Passing options
+
+During hook initialization:
+
+```js
+const [{ count, data, error, fetching }, insertTodos] = useInsert('todos', {
+  options: {
+    returning: 'represenation',
+    count: 'exact',
+  },
+})
+```
+
+Or execute function:
+
+```js
+const { count, data, error } = await insertTodos(
+  { name: 'Buy more cheese' },
+  {
+    count: 'estimated',
+    returning: 'minimal',
+  },
+)
 ```

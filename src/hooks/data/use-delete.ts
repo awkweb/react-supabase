@@ -20,8 +20,8 @@ export type UseDeleteResponse<Data = any> = [
 ]
 
 export type UseDeleteOptions = {
-    returning?: Returning
     count?: null | Count
+    returning?: Returning
 }
 
 export type UseDeleteConfig<Data = any> = {

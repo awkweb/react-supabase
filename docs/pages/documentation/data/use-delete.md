@@ -2,15 +2,17 @@
 
 Performs a DELETE on the table.
 
-```js highlight=4,5,6,7,8,9,10,11,12,13,14
+```js highlight=4,5,6,7,8,9,10,11,12,13,14,15,16
 import { useDelete } from 'react-supabase'
 
 function Page() {
   const [
-    { count, data, error, fetching }, deleteTodos] = useDelete(
+    { count, data, error, fetching },
+    deleteTodos,
+  ] = useDelete(
     'todos',
+    // Passing optional options
     {
-      // Passing optional options
       options: {
         returning: 'represenation',
         count: 'exact',

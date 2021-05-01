@@ -17,8 +17,8 @@ export type UseSelectResponse<Data = any> = [
 ]
 
 export type UseSelectOptions = {
-    head?: boolean
     count?: null | Count
+    head?: boolean
 }
 
 export type UseSelectConfig<Data = any> = {

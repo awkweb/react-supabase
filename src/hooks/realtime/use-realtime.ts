@@ -25,9 +25,13 @@ export type UseRealtimeCompareFn<Data = any> = (
     payload: Data,
 ) => boolean
 
+type CompareFnDefaultData<Data> = Data & { id: any }
+
 export function useRealtime<Data = any>(
     table: string,
-    compareFn: UseRealtimeCompareFn = (a, b) => a.id === b.id,
+    compareFn: UseRealtimeCompareFn<Data> = (a, b) =>
+        (<CompareFnDefaultData<Data>>a).id ===
+        (<CompareFnDefaultData<Data>>b).id,
 ): UseRealtimeResponse<Data> {
     if (table === '*')
         throw Error(

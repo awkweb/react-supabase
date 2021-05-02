@@ -16,6 +16,8 @@ function Page() {
 
 You can pass a function for comparing subscription event changes. By default, the compare function checks the `id` field.
 
+When using your own compare function, you typically want to compare unique values:
+
 ```js highlight=6
 import { useRealtime } from 'react-supabase'
 

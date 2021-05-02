@@ -1,7 +1,6 @@
 .DS_Store
 .eslintcache
 dist/
-docs/.next/*
 node_modules/
 yarn-debug.log*
 yarn-error.log*

@@ -1,6 +1,6 @@
 # useSubscription
 
-Subscribe to realtime changes to databse.
+Subscribe to database changes in realtime.
 
 ```js highlight=4,5,6
 import { useSubscription } from 'react-supabase'

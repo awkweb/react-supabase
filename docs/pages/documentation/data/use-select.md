@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 # useSelect
 
 Performs vertical filtering with SELECT.

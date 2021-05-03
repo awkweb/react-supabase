@@ -6,7 +6,7 @@ Fetch table and listen for changes.
 import { useRealtime } from 'react-supabase'
 
 function Page() {
-  const [{ data, error, fetching }, refresh] = useRealtime('todos')
+  const [{ data, error, fetching }, reexecute] = useRealtime('todos')
 
   return ...
 }
@@ -22,7 +22,7 @@ When using your own compare function, you typically want to compare unique value
 import { useRealtime } from 'react-supabase'
 
 function Page() {
-  const [{ data, error, fetching }, refresh] = useRealtime(
+  const [result, reexecute] = useRealtime(
     'todos',
     (data, payload) => data.username === payload.username,
   )

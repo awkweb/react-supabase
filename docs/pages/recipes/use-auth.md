@@ -34,7 +34,7 @@ import { AuthContext } from 'path/to/auth/context'
 
 export function useAuth() {
   const context = useContext(AuthContext)
-  if (context === undefined) {
+  if (context === undefined)
     throw Error('useAuth must be used within AuthProvider')
   return context
 }

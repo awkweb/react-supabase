@@ -6,7 +6,7 @@ Performs INSERT into table.
 import { useInsert } from 'react-supabase'
 
 function Page() {
-  const [{ count, data, error, fetching }, insertTodos] = useInsert('todos')
+  const [{ count, data, error, fetching }, execute] = useInsert('todos')
 
   async function onClickInsert(name) {
     const { count, data, error } = await insertTodos({
@@ -23,7 +23,7 @@ function Page() {
 During hook initialization:
 
 ```js
-const [{ count, data, error, fetching }, insertTodos] = useInsert('todos', {
+const [{ count, data, error, fetching }, execute] = useInsert('todos', {
   options: {
     returning: 'represenation',
     count: 'exact',
@@ -34,7 +34,7 @@ const [{ count, data, error, fetching }, insertTodos] = useInsert('todos', {
 Or execute function:
 
 ```js
-const { count, data, error } = await insertTodos(
+const { count, data, error } = await execute(
   { name: 'Buy more cheese' },
   {
     count: 'estimated',

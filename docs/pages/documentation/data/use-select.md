@@ -6,7 +6,7 @@ Performs vertical filtering with SELECT.
 import { useSelect } from 'react-supabase'
 
 function Page() {
-  const [{ count, data, error, fetching }, selectTodos] = useSelect('todos')
+  const [{ count, data, error, fetching }, reexecute] = useSelect('todos')
 
   if (error) return <div>{error.message}</div>
   if (fetching) return <div>Loading todos</div>
@@ -21,7 +21,7 @@ function Page() {
 During hook initialization:
 
 ```js
-const [{ count, data, error, fetching }, selectTodos] = useSelect('todos', {
+const [{ count, data, error, fetching }, reexecute] = useSelect('todos', {
   columns: 'id, name, description',
   filter: (query) => query.eq('status', 'completed'),
   options: {
@@ -47,7 +47,7 @@ function Page() {
     (query) => query.eq('status', status),
     [status],
   )
-  const [{ data }] = useSelect('todos', { filter })
+  const [result, reexecute] = useSelect('todos', { filter })
 
   return ...
 }

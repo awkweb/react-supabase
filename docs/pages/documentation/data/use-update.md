@@ -6,10 +6,10 @@ Performs UPDATE on table.
 import { useUpdate } from 'react-supabase'
 
 function Page() {
-  const [{ count, data, error, fetching }, updateTodos] = useUpdate('todos')
+  const [{ count, data, error, fetching }, execute] = useUpdate('todos')
 
   async function onClickMarkAllComplete() {
-    const { count, data, error } = await updateTodos(
+    const { count, data, error } = await execute(
       { completed: true },
       (query) => query.eq('completed', false),
     )
@@ -26,7 +26,7 @@ Throws error during execute if a filter is not passed during hook initialization
 During hook initialization:
 
 ```js
-const [{ count, data, error, fetching }, updateTodos] = useUpdate('todos', {
+const [{ count, data, error, fetching }, execute] = useUpdate('todos', {
   filter: (query) => query.eq('completed', false),
   options: {
     returning: 'represenation',
@@ -38,7 +38,7 @@ const [{ count, data, error, fetching }, updateTodos] = useUpdate('todos', {
 Or execute function:
 
 ```js
-const { count, data, error } = await updateTodos(
+const { count, data, error } = await execute(
   { completed: true },
   (query) => query.eq('completed', false),
   {

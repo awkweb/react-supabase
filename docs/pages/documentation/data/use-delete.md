@@ -6,7 +6,7 @@ Performs DELETE on table.
 import { useDelete } from 'react-supabase'
 
 function Page() {
-  const [{ count, data, error, fetching }, deleteTodos] = useDelete('todos')
+  const [{ count, data, error, fetching }, execute] = useDelete('todos')
 
   async function onClickDelete(id) {
     const { count, data, error } = await deleteTodos(
@@ -25,7 +25,7 @@ Throws error during execute if a filter is not passed during hook initialization
 During hook initialization:
 
 ```js
-const [{ count, data, error, fetching }, deleteTodos] = useDelete('todos', {
+const [{ count, data, error, fetching }, execute] = useDelete('todos', {
   filter: (query) => query.eq('status', 'completed'),
   options: {
     returning: 'represenation',
@@ -37,11 +37,8 @@ const [{ count, data, error, fetching }, deleteTodos] = useDelete('todos', {
 Or execute function:
 
 ```js
-const { count, data, error } = await deleteTodos(
-  (query) => query.eq('id', id),
-  {
-    returning: 'minimal',
-    count: 'estimated',
-  },
-)
+const { count, data, error } = await execute((query) => query.eq('id', id), {
+  returning: 'minimal',
+  count: 'estimated',
+})
 ```

@@ -25,18 +25,19 @@ const App = () => (
 )
 ```
 
-Now every component inside and under the `Provider` can use the Supabase client (`useClient`) and related hooks (`useSelect`, `useSignIn`, `useSubscription`, etc.):
+Now every component inside and under the `Provider` can use the Supabase client and hooks:
 
 ```js
-import { useSelect } from 'react-supabase'
+import { useRealtime } from 'react-supabase'
 
 const Todos = () => {
-  const [result, reexecuteSelect] = useSelect('todos')
+  const [result, reexecute] = useRealtime('todos')
 
   const { data, fetching, error } = result
 
   if (fetching) return <p>Loading...</p>
   if (error) return <p>Oh no... {error.message}</p>
+
   return (
     <ul>
       {data.map((todo) => (

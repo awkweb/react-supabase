@@ -14,7 +14,7 @@ export type UseUpsertState<Data = any> = {
 export type UseUpsertResponse<Data = any> = [
     UseUpsertState<Data>,
     (
-        values: Partial<Data>,
+        values: Partial<Data> | Partial<Data>[],
         options?: UseUpsertOptions,
         filter?: Filter<Data>,
     ) => Promise<Pick<UseUpsertState<Data>, 'count' | 'data' | 'error'>>,

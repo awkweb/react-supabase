@@ -3,5 +3,6 @@
     "use-filter": "useFilter",
     "use-insert": "useInsert",
     "use-select": "useSelect",
-    "use-update": "useUpdate"
+    "use-update": "useUpdate",
+    "use-upsert": "useUpsert"
 }

@@ -29,7 +29,7 @@ export type UseSelectConfig<Data = any> = {
 
 export function useSelect<Data = any>(
     table: string,
-    config: UseSelectConfig = { columns: '*', options: {} },
+    config: UseSelectConfig<Data> = { columns: '*', options: {} },
 ): UseSelectResponse<Data> {
     const client = useClient()
     const isMounted = useRef(false)

@@ -1,6 +1,6 @@
 {
     "name": "react-supabase",
-    "version": "0.1.7",
+    "version": "0.1.8",
     "description": "React Hooks library for Supabase",
     "main": "./dist/index.cjs.js",
     "module": "./dist/index.es.js",

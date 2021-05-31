@@ -2,7 +2,7 @@
 
 Creates dynamic filter for using with other hooks.
 
-```js highlight=4,5,6,7,8,9,10,11
+```tsx highlight=4,5,6,7,8,9,10,11
 import { useFilter, useSelect } from 'react-supabase'
 
 function Page() {

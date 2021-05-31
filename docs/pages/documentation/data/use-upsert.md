@@ -2,7 +2,7 @@
 
 Performs `INSERT` or `UPDATE` on table.
 
-```js highlight=4
+```tsx highlight=4
 import { useUpsert } from 'react-supabase'
 
 function Page() {
@@ -32,7 +32,7 @@ function Page() {
 
 During hook initialization:
 
-```js
+```tsx
 const [{ count, data, error, fetching }, execute] = useUpsert('users', {
   filter: (query) => query.eq('completed', false),
   options: {
@@ -45,7 +45,7 @@ const [{ count, data, error, fetching }, execute] = useUpsert('users', {
 
 Or execute function:
 
-```js
+```tsx
 const { count, data, error } = await execute(
   { completed: true },
   {

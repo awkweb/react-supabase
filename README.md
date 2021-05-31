@@ -20,7 +20,7 @@ npm install --save react-supabase @supabase/supabase-js
 
 Create a Supabase client and pass it to the `Provider`:
 
-```js
+```tsx
 import { createClient } from '@supabase/supabase-js'
 import { Provider } from 'react-supabase'
 
@@ -35,7 +35,7 @@ const App = () => (
 
 Now every component inside and under the `Provider` can use the Supabase client and hooks:
 
-```js
+```tsx
 import { useRealtime } from 'react-supabase'
 
 const Todos = () => {

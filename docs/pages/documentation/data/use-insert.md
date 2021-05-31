@@ -2,7 +2,7 @@
 
 Performs INSERT into table.
 
-```js highlight=4
+```tsx highlight=4
 import { useInsert } from 'react-supabase'
 
 function Page() {
@@ -22,7 +22,7 @@ function Page() {
 
 During hook initialization:
 
-```js
+```tsx
 const [{ count, data, error, fetching }, execute] = useInsert('todos', {
   options: {
     returning: 'represenation',
@@ -33,7 +33,7 @@ const [{ count, data, error, fetching }, execute] = useInsert('todos', {
 
 Or execute function:
 
-```js
+```tsx
 const { count, data, error } = await execute(
   { name: 'Buy more cheese' },
   {

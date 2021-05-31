@@ -2,7 +2,7 @@
 
 Sends reset request to email address.
 
-```js highlight=4
+```tsx highlight=4
 import { useResetPassword } from 'react-supabase'
 
 function Page() {
@@ -23,7 +23,7 @@ function Page() {
 
 During hook initialization:
 
-```js
+```tsx
 const [{ error, fetching }, resetPassword] = useResetPassword({
   options: {
     redirectTo: 'https://example.com/welcome',
@@ -33,7 +33,7 @@ const [{ error, fetching }, resetPassword] = useResetPassword({
 
 Or execute function:
 
-```js
+```tsx
 const { error } = await resetPassword('user@example.com', {
   redirectTo: 'https://example.com/reset',
 })

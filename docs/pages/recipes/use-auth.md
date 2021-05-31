@@ -2,7 +2,7 @@
 
 Keep track of the authenticated session with the [Context API](https://reactjs.org/docs/context.html) and [`useAuthStateChange`](/documentation/auth/use-auth-state-change) hook. First, create a new React Context:
 
-```js
+```tsx
 import { createContext, useEffect, useState } from 'react'
 import { useAuthStateChange, useClient } from 'react-supabase'
 
@@ -29,7 +29,7 @@ export function AuthProvider({ children }) {
 
 And auth hook:
 
-```js
+```ts
 import { AuthContext } from 'path/to/auth/context'
 
 export function useAuth() {
@@ -42,7 +42,7 @@ export function useAuth() {
 
 Then, wrap your app in `AuthProvider` and use the `useAuth` hook in your components:
 
-```js highlight=4
+```tsx highlight=4
 import { useAuth } from 'path/to/auth/hook'
 
 function Page() {

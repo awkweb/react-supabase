@@ -2,7 +2,7 @@
 
 Fetch table and listen for changes.
 
-```js highlight=4
+```tsx highlight=4
 import { useRealtime } from 'react-supabase'
 
 function Page() {
@@ -18,7 +18,7 @@ You can pass a function for comparing subscription event changes. By default, th
 
 When using your own compare function, you typically want to compare unique values:
 
-```js highlight=6
+```tsx highlight=6
 import { useRealtime } from 'react-supabase'
 
 function Page() {

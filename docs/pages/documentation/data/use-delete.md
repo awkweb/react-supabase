@@ -2,7 +2,7 @@
 
 Performs DELETE on table.
 
-```js highlight=4
+```tsx highlight=4
 import { useDelete } from 'react-supabase'
 
 function Page() {
@@ -24,7 +24,7 @@ Throws error during execute if a filter is not passed during hook initialization
 
 During hook initialization:
 
-```js
+```tsx
 const [{ count, data, error, fetching }, execute] = useDelete('todos', {
   filter: (query) => query.eq('status', 'completed'),
   options: {
@@ -36,7 +36,7 @@ const [{ count, data, error, fetching }, execute] = useDelete('todos', {
 
 Or execute function:
 
-```js
+```tsx
 const { count, data, error } = await execute((query) => query.eq('id', id), {
   returning: 'minimal',
   count: 'estimated',

@@ -9,11 +9,15 @@ export type UseSelectState<Data = any> = {
     data?: Data[] | null
     error?: PostgrestError | null
     fetching: boolean
+    stale: boolean
 }
 
 export type UseSelectResponse<Data = any> = [
     UseSelectState<Data>,
-    () => Promise<Pick<UseSelectState<Data>, 'count' | 'data' | 'error'>>,
+    () => Promise<Pick<
+        UseSelectState<Data>,
+        'count' | 'data' | 'error'
+    > | null>,
 ]
 
 export type UseSelectOptions = {
@@ -25,6 +29,7 @@ export type UseSelectConfig<Data = any> = {
     columns?: string
     filter?: Filter<Data> | false | null
     options?: UseSelectOptions
+    pause?: boolean
 }
 
 export function useSelect<Data = any>(
@@ -33,10 +38,19 @@ export function useSelect<Data = any>(
 ): UseSelectResponse<Data> {
     const client = useClient()
     const isMounted = useRef(false)
-    const [state, setState] = useState<UseSelectState>(initialState)
+    const [state, setState] = useState<UseSelectState>({
+        ...initialState,
+        stale: false,
+    })
 
     const execute = useCallback(async () => {
-        setState({ ...initialState, fetching: true })
+        if (config.pause) return null
+        setState((x) => ({
+            ...initialState,
+            data: x.data,
+            stale: true,
+            fetching: true,
+        }))
         const source = client
             .from<Data>(table)
             .select(config.columns, config.options)
@@ -44,7 +58,8 @@ export function useSelect<Data = any>(
             ? config.filter(source)
             : source)
         const res = { count, data, error }
-        if (isMounted.current) setState({ ...res, fetching: false })
+        if (isMounted.current)
+            setState({ ...res, stale: false, fetching: false })
         return res
     }, [client, config, table])
 

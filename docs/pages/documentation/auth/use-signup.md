@@ -2,7 +2,7 @@
 
 Creates new user.
 
-```js highlight=4
+```tsx highlight=4
 import { useSignUp } from 'react-supabase'
 
 function Page() {
@@ -27,7 +27,7 @@ function Page() {
 
 During hook initialization:
 
-```js
+```tsx
 const [{ error, fetching, session, user }, signUp] = useSignUp({
   options: {
     redirectTo: 'https://example.com/dashboard',
@@ -37,7 +37,7 @@ const [{ error, fetching, session, user }, signUp] = useSignUp({
 
 Or execute function:
 
-```js
+```tsx
 const { error, session, user } = await signUp(
   {
     email: 'user@example.com',

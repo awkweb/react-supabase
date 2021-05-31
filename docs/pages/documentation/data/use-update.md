@@ -2,7 +2,7 @@
 
 Performs UPDATE on table.
 
-```js highlight=4
+```tsx highlight=4
 import { useUpdate } from 'react-supabase'
 
 function Page() {
@@ -25,7 +25,7 @@ Throws error during execute if a filter is not passed during hook initialization
 
 During hook initialization:
 
-```js
+```tsx
 const [{ count, data, error, fetching }, execute] = useUpdate('todos', {
   filter: (query) => query.eq('completed', false),
   options: {
@@ -37,7 +37,7 @@ const [{ count, data, error, fetching }, execute] = useUpdate('todos', {
 
 Or execute function:
 
-```js
+```tsx
 const { count, data, error } = await execute(
   { completed: true },
   (query) => query.eq('completed', false),

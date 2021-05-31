@@ -2,7 +2,7 @@
 
 In order to use a Supabase client, you need to provide it via the [Context API](https://reactjs.org/docs/context.html). This may be done with the help of the Provider export.
 
-```js
+```tsx
 import { createClient } from '@supabase/supabase-js'
 import { Provider } from 'react-supabase'
 

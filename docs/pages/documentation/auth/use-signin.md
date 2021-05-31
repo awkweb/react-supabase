@@ -2,7 +2,7 @@
 
 Log in existing user, or login via a third-party provider.
 
-```js highlight=4
+```tsx highlight=4
 import { useSignIn } from 'react-supabase'
 
 function Page() {
@@ -27,7 +27,7 @@ function Page() {
 
 During hook initialization:
 
-```js
+```tsx
 const [{ error, fetching, session, user }, signIn] = useSignIn({
   options: {
     redirectTo: 'https://example.com/dashboard',
@@ -37,7 +37,7 @@ const [{ error, fetching, session, user }, signIn] = useSignIn({
 
 Or the execute function:
 
-```js
+```tsx
 const { error, session, user } = await signIn(
   {
     email: 'user@example.com',
@@ -53,7 +53,7 @@ const { error, session, user } = await signIn(
 
 Omit password from the execute function:
 
-```js
+```tsx
 const { error, session, user } = await signIn({ email: 'user@example.com' })
 ```
 
@@ -61,7 +61,7 @@ const { error, session, user } = await signIn({ email: 'user@example.com' })
 
 Either pass a provider (and scopes) during hook initialization:
 
-```js
+```tsx
 const [{ error, fetching, user, session }, signIn] = useSignIn({
   provider: 'github',
   options: {
@@ -72,7 +72,7 @@ const [{ error, fetching, user, session }, signIn] = useSignIn({
 
 Or execute function:
 
-```js
+```tsx
 const { error, session, user } = await signIn(
   { provider: 'github' },
   { scopes: 'repo gist notifications' },

@@ -2,7 +2,7 @@
 
 Performs vertical filtering with SELECT.
 
-```js highlight=4
+```tsx highlight=4
 import { useSelect } from 'react-supabase'
 
 function Page() {
@@ -20,7 +20,7 @@ function Page() {
 
 During hook initialization:
 
-```js
+```tsx
 const [{ count, data, error, fetching }, reexecute] = useSelect('todos', {
   columns: 'id, name, description',
   filter: (query) => query.eq('status', 'completed'),
@@ -28,6 +28,7 @@ const [{ count, data, error, fetching }, reexecute] = useSelect('todos', {
     count: 'exact',
     head: false,
   },
+  pause: false,
 })
 ```
 
@@ -37,7 +38,7 @@ When using dynamic filters, you must make sure filters aren’t recreated every 
 
 The easiest way to avoid this is to create dynamic filters with the [`useFilter`](/documentation/data/use-filter) hook:
 
-```js
+```tsx
 import { useState } from 'react'
 import { useFilter, useSelect } from 'react-supabase'
 
@@ -50,5 +51,35 @@ function Page() {
   const [result, reexecute] = useSelect('todos', { filter })
 
   return ...
+}
+```
+
+## Pausing `useSelect`
+
+In some cases, we may want `useSelect` to execute when a pre-condition has been met, and not execute otherwise. For instance, we may be building a form and want validation to only take place when a field has been filled out.
+
+We can do this by setting the `pause` option to `true`:
+
+```tsx
+import { useState } from 'react'
+import { useFilter, useSelect } from 'react-supabase'
+
+function Page() {
+  const [username, setUsername] = useState(null)
+  const filter = useFilter((query) => query.eq('username', username), [
+    username,
+  ])
+  const [result, reexecute] = useSelect('users', {
+    filter,
+    pause: !username,
+  })
+
+  return (
+    <form>
+      <label>Enter a username</label>
+      <input onChange={(e) => setUsername(e.target.value)} />
+      {result.data && <div>Username is taken</div>}
+    </form>
+  )
 }
 ```

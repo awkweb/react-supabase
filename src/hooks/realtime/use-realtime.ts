@@ -13,7 +13,10 @@ export type UseRealtimeState<Data = any> = Omit<
 
 export type UseRealtimeResponse<Data = any> = [
     UseRealtimeState<Data>,
-    () => Promise<Pick<UseSelectState<Data>, 'count' | 'data' | 'error'>>,
+    () => Promise<Pick<
+        UseSelectState<Data>,
+        'count' | 'data' | 'error'
+    > | null>,
 ]
 
 export type UseRealtimeAction<Data = any> =

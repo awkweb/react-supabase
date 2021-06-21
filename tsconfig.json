@@ -18,8 +18,8 @@
         "resolveJsonModule": true,
         "skipLibCheck": false,
         "strict": true,
-        "target": "es5",
-        "types": ["node", "jest", "vite/client"]
+        "target": "esnext",
+        "types": ["node", "jest"]
     },
     "include": ["src/**/*"],
     "watchOptions": {

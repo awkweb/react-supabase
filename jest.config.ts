@@ -1,4 +1,6 @@
-module.exports = {
+import type { Config } from '@jest/types'
+
+const config: Config.InitialOptions = {
     preset: 'ts-jest',
     testRegex: '.*\\.test\\.(ts|tsx)$',
     watchPlugins: [
@@ -6,3 +8,5 @@ module.exports = {
         'jest-watch-typeahead/testname',
     ],
 }
+
+export default config

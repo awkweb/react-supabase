@@ -57,54 +57,50 @@ export function useRealtime<Data = any>(
     return [state, reexecute]
 }
 
-const reducer = <Data = any>(compareFn: UseRealtimeCompareFn) => (
-    state: UseRealtimeState<Data>,
-    action: UseRealtimeAction<Data>,
-): UseRealtimeState<Data> => {
-    const old = state.data
-    switch (action.type) {
-        case 'FETCH':
-            return { ...state, old, ...action.payload }
-        case 'SUBSCRIPTION':
-            switch (action.payload.eventType) {
-                case 'DELETE':
-                    return {
-                        ...state,
-                        data: state.data?.filter(
-                            (x) => !compareFn(x, action.payload.old),
-                        ),
-                        fetching: false,
-                        old,
-                    }
-                case 'INSERT':
-                    return {
-                        ...state,
-                        data: [...(old ?? []), action.payload.new],
-                        fetching: false,
-                        old,
-                    }
-                case 'UPDATE': {
-                    const data = old ?? []
-                    const index = data.findIndex((x) =>
-                        compareFn(x, action.payload.new),
-                    )
-                    return {
-                        ...state,
-                        data: [
-                            ...data.slice(0, index),
-                            action.payload.new,
-                            ...data.slice(index + 1),
-                        ],
-                        fetching: false,
-                        old,
+const reducer =
+    <Data = any>(compareFn: UseRealtimeCompareFn) =>
+    (
+        state: UseRealtimeState<Data>,
+        action: UseRealtimeAction<Data>,
+    ): UseRealtimeState<Data> => {
+        const old = state.data
+        switch (action.type) {
+            case 'FETCH':
+                return { ...state, old, ...action.payload }
+            case 'SUBSCRIPTION':
+                switch (action.payload.eventType) {
+                    case 'DELETE':
+                        return {
+                            ...state,
+                            data: state.data?.filter(
+                                (x) => !compareFn(x, action.payload.old),
+                            ),
+                            fetching: false,
+                            old,
+                        }
+                    case 'INSERT':
+                        return {
+                            ...state,
+                            data: [...(old ?? []), action.payload.new],
+                            fetching: false,
+                            old,
+                        }
+                    case 'UPDATE': {
+                        const data = old ?? []
+                        const index = data.findIndex((x) =>
+                            compareFn(x, action.payload.new),
+                        )
+                        return {
+                            ...state,
+                            data: [
+                                ...data.slice(0, index),
+                                action.payload.new,
+                                ...data.slice(index + 1),
+                            ],
+                            fetching: false,
+                            old,
+                        }
                     }
                 }
-                default:
-                    throw Error(
-                        `eventType "${action.payload.eventType}" does not exist.`,
-                    )
-            }
-        default:
-            throw Error('Action type does not exist.')
+        }
     }
-}

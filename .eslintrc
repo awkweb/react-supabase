@@ -10,7 +10,7 @@
         },
         "allowImportExportEverywhere": true
     },
-    "plugins": ["@typescript-eslint", "import", "testing-library"],
+    "plugins": ["@typescript-eslint", "import", "react", "testing-library"],
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
@@ -55,7 +55,19 @@
         ],
         // `eslint-plugin-react`
         // https://github.com/yannickcr/eslint-plugin-react
-        "react/prop-types": "off"
+        "react/display-name": "off",
+        "react/jsx-boolean-value": ["warn", "never"],
+        "react/jsx-sort-props": [
+            "error",
+            {
+                "callbacksLast": true
+            }
+        ],
+        "react/jsx-wrap-multilines": "error",
+        "react/no-array-index-key": "error",
+        "react/no-multi-comp": "off",
+        "react/prop-types": "off",
+        "react/self-closing-comp": "warn"
     },
     "settings": {
         "import/parsers": {

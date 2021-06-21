@@ -66,9 +66,10 @@ import { useFilter, useSelect } from 'react-supabase'
 
 function Page() {
   const [username, setUsername] = useState(null)
-  const filter = useFilter((query) => query.eq('username', username), [
-    username,
-  ])
+  const filter = useFilter(
+    (query) => query.eq('username', username),
+    [username],
+  )
   const [result, reexecute] = useSelect('users', {
     filter,
     pause: !username,

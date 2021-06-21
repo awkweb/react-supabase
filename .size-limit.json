@@ -1,0 +1,10 @@
+[
+    {
+        "path": "dist/index.cjs.js",
+        "limit": "5 KB"
+    },
+    {
+        "path": "dist/index.es.js",
+        "limit": "5 KB"
+    }
+]

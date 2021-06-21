@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import dts from 'vite-plugin-dts'
 
 import pkg from './package.json'
 
@@ -16,4 +17,18 @@ export default defineConfig({
             ],
         },
     },
+    plugins: [
+        dts({
+            exclude: ['src/**test.ts*'],
+            beforeWriteFile: (filePath, content) => ({
+                content,
+                filePath: filePath.replace('src', ''),
+            }),
+            compilerOptions: {
+                emitDeclarationOnly: true,
+                noEmit: false,
+            },
+            outputDir: 'dist/types',
+        }),
+    ],
 })

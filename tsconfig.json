@@ -19,7 +19,7 @@
         "skipLibCheck": false,
         "strict": true,
         "target": "es5",
-        "types": ["node", "jest", "vite/client"]
+        "types": ["node", "jest"]
     },
     "include": ["src/**/*"],
     "watchOptions": {

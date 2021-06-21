@@ -23,7 +23,7 @@
         "lint:fix": "yarn lint --fix",
         "lint:format": "prettier --write .",
         "lint:types": "tsc --noEmit",
-        "prepare": "husky install && yarn build",
+        "prepare": "husky install",
         "prepublishOnly": "yarn clean && yarn build",
         "size": "size-limit",
         "test": "jest"

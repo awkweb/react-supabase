@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from 'react'
 import { SupabaseRealtimePayload } from '@supabase/supabase-js'
 
-import { UseSelectState, useSelect } from '../data'
+import { UseSelectConfig, UseSelectState, useSelect } from '../data'
 import { useSubscription } from './use-subscription'
 
 export type UseRealtimeState<Data = any> = Omit<
@@ -31,17 +31,22 @@ export type UseRealtimeCompareFn<Data = any> = (
 type CompareFnDefaultData<Data> = Data & { id: any }
 
 export function useRealtime<Data = any>(
-    table: string,
+    options: string | ({ table: string } & UseSelectConfig<Data>),
     compareFn: UseRealtimeCompareFn<Data> = (a, b) =>
         (<CompareFnDefaultData<Data>>a).id ===
         (<CompareFnDefaultData<Data>>b).id,
 ): UseRealtimeResponse<Data> {
+    if (typeof options === 'string') {
+        options = { table: options }
+    }
+    const { table, ...config } = options
+
     if (table === '*')
         throw Error(
             'Must specify table or row. Cannot listen for all database changes.',
         )
 
-    const [result, reexecute] = useSelect<Data>(table)
+    const [result, reexecute] = useSelect<Data>(table, config)
     const [state, dispatch] = useReducer<
         React.Reducer<UseRealtimeState<Data>, UseRealtimeAction<Data>>
     >(reducer(compareFn), result)

@@ -30,3 +30,26 @@ function Page() {
   return ...
 }
 ```
+
+## Initial selection of records
+
+When initializing the component you might need to filter your data appropriately. You can pass the options directly to the `useSelect` hook.
+
+First argument can be either a `string` table name or `useSelect` options with table property.
+
+```tsx highlight=6
+import { useRealtime } from 'react-supabase'
+
+function Page() {
+  const [result, reexecute] = useRealtime(
+    {
+      table: 'todos',
+      columns: 'id, name, description',
+      filter: (query) => query.eq('completed', false),
+    },
+    (data, payload) => data.username === payload.username,
+  )
+
+  return ...
+}
+```

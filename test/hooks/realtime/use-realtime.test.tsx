@@ -13,4 +13,11 @@ describe('useRealtime', () => {
         const { result } = renderHook(() => useRealtime('*'), { wrapper })
         expect(() => result.current).toThrowErrorMatchingSnapshot()
     })
+
+    it('should throw when trying to listen all database changes via options', () => {
+        const { result } = renderHook(() => useRealtime({ table: '*' }), {
+            wrapper,
+        })
+        expect(() => result.current).toThrowErrorMatchingSnapshot()
+    })
 })

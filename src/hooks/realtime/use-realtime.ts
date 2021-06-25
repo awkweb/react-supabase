@@ -63,7 +63,7 @@ export function useRealtime<Data = any>(
 }
 
 const reducer =
-    <Data = any>(compareFn: UseRealtimeCompareFn) =>
+    <Data = any>(compareFn: UseRealtimeCompareFn<Data>) =>
     (
         state: UseRealtimeState<Data>,
         action: UseRealtimeAction<Data>,

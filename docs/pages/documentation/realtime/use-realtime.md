@@ -44,7 +44,7 @@ function Page() {
   const [result, reexecute] = useRealtime(
     {
       table: 'todos',
-      columns: 'id, name, description',
+      columns: 'id, username, description',
       filter: (query) => query.eq('completed', false),
     },
     (data, payload) => data.username === payload.username,

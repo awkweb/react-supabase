@@ -23,7 +23,7 @@ export type UseRealtimeAction<Data = any> =
     | { type: 'FETCH'; payload: UseSelectState<Data> }
     | { type: 'SUBSCRIPTION'; payload: SupabaseRealtimePayload<Data> }
 
-export type UseRealtimeConfig<Data> = {
+export type UseRealtimeConfig<Data = any> = {
     select?: Omit<UseSelectConfig<Data>, 'pause'>
 }
 

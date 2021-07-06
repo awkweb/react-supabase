@@ -18,7 +18,7 @@ You can pass a function for comparing subscription event changes. By default, th
 
 When using your own compare function, you typically want to compare unique values:
 
-```tsx highlight=6
+```tsx highlight=7
 import { useRealtime } from 'react-supabase'
 
 function Page() {

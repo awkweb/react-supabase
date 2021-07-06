@@ -3,3 +3,5 @@
 exports[`useRealtime should throw when not inside Provider 1`] = `"No client has been specified using Provider."`;
 
 exports[`useRealtime should throw when trying to listen all database changes 1`] = `"Must specify table or row. Cannot listen for all database changes."`;
+
+exports[`useRealtime should throw when trying to listen all database changes via options 1`] = `"Must specify table or row. Cannot listen for all database changes."`;

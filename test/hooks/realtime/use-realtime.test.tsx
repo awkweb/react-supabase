@@ -13,4 +13,18 @@ describe('useRealtime', () => {
         const { result } = renderHook(() => useRealtime('*'), { wrapper })
         expect(() => result.current).toThrowErrorMatchingSnapshot()
     })
+
+    it('should throw when trying to listen all database changes via options', () => {
+        const { result } = renderHook(
+            () =>
+                useRealtime('*', {
+                    select: {
+                        columns: 'id, username, completed',
+                        filter: (query) => query.eq('completed', false),
+                    },
+                }),
+            { wrapper },
+        )
+        expect(() => result.current).toThrowErrorMatchingSnapshot()
+    })
 })

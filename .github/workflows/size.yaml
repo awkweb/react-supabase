@@ -7,12 +7,31 @@ jobs:
   size:
     name: Size
     runs-on: ubuntu-latest
-    env:
-      CI_JOB_NUMBER: 1
+    strategy:
+      matrix:
+        node-version: [14]
     steps:
       - name: Check out
         uses: actions/checkout@v2
 
+      - name: Set up Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Load yarn cache
+        uses: actions/cache@v2.1.6
+        id: yarn-cache
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-yarn-cache-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-yarn-cache-
+
+      - name: Install dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn --frozen-lockfile
+
       - uses: andresz1/size-limit-action@v1.5.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          skip_step: install

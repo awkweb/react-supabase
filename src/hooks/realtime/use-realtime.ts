@@ -23,6 +23,10 @@ export type UseRealtimeAction<Data = any> =
     | { type: 'FETCH'; payload: UseSelectState<Data> }
     | { type: 'SUBSCRIPTION'; payload: SupabaseRealtimePayload<Data> }
 
+export type UseRealtimeConfig<Data> = {
+    select?: Omit<UseSelectConfig<Data>, 'pause'>
+}
+
 export type UseRealtimeCompareFn<Data = any> = (
     data: Data,
     payload: Data,
@@ -31,22 +35,18 @@ export type UseRealtimeCompareFn<Data = any> = (
 type CompareFnDefaultData<Data> = Data & { id: any }
 
 export function useRealtime<Data = any>(
-    options: string | ({ table: string } & UseSelectConfig<Data>),
+    table: string,
+    config?: UseRealtimeConfig<Data>,
     compareFn: UseRealtimeCompareFn<Data> = (a, b) =>
         (<CompareFnDefaultData<Data>>a).id ===
         (<CompareFnDefaultData<Data>>b).id,
 ): UseRealtimeResponse<Data> {
-    if (typeof options === 'string') {
-        options = { table: options }
-    }
-    const { table, ...config } = options
-
     if (table === '*')
         throw Error(
             'Must specify table or row. Cannot listen for all database changes.',
         )
 
-    const [result, reexecute] = useSelect<Data>(table, config)
+    const [result, reexecute] = useSelect<Data>(table, config?.select)
     const [state, dispatch] = useReducer<
         React.Reducer<UseRealtimeState<Data>, UseRealtimeAction<Data>>
     >(reducer(compareFn), result)

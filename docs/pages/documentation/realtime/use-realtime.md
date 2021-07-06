@@ -24,6 +24,7 @@ import { useRealtime } from 'react-supabase'
 function Page() {
   const [result, reexecute] = useRealtime(
     'todos',
+    { select: { columns:'id, username' } },
     (data, payload) => data.username === payload.username,
   )
 
@@ -37,15 +38,17 @@ When initializing the component you might need to filter your data appropriately
 
 First argument can be either a `string` table name or `useSelect` options with table property.
 
-```tsx highlight=6
+```tsx highlight=7,8,9,10
 import { useRealtime } from 'react-supabase'
 
 function Page() {
   const [result, reexecute] = useRealtime(
+    'todos',
     {
-      table: 'todos',
-      columns: 'id, username, description',
-      filter: (query) => query.eq('completed', false),
+      select: {
+        columns: 'id, username, description',
+        filter: (query) => query.eq('completed', false),
+      }
     },
     (data, payload) => data.username === payload.username,
   )

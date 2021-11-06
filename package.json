@@ -35,8 +35,8 @@
     "dependencies": {},
     "devDependencies": {
         "@size-limit/preset-small-lib": "^4.12.0",
-        "@supabase/postgrest-js": "0.28.4",
-        "@supabase/supabase-js": "1.11.6",
+        "@supabase/postgrest-js": "0.34.1",
+        "@supabase/supabase-js": "1.25.2",
         "@testing-library/react-hooks": "^5.1.1",
         "@types/jest": "^26.0.22",
         "@types/node": "^14.14.41",

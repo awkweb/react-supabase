@@ -1,9 +1,10 @@
+import { ApiError } from '@supabase/gotrue-js/dist/main/GoTrueApi'
 import { useCallback, useState } from 'react'
 
 import { useClient } from '../use-client'
 
 export type UseResetPasswordState = {
-    error?: Error | null
+    error?: ApiError | null
     fetching: boolean
 }
 

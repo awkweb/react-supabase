@@ -1,11 +1,12 @@
 import { Provider, Session, User, UserCredentials } from '@supabase/gotrue-js'
+import { ApiError } from '@supabase/gotrue-js/dist/main/GoTrueApi'
 import { useCallback, useState } from 'react'
 
 import { useClient } from '../use-client'
 import { initialState } from './state'
 
 export type UseSignInState = {
-    error?: Error | null
+    error?: ApiError | null
     fetching: boolean
     session?: Session | null
     user?: User | null

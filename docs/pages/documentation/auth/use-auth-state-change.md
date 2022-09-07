@@ -7,7 +7,7 @@ import { useAuthStateChange } from 'react-supabase'
 
 function Page() {
   useAuthStateChange((event, session) => {
-    console.log(`Supbase auth event: ${event}`, session)
+    console.log(`Supabase auth event: ${event}`, session)
   })
 
   return ...

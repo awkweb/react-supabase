@@ -21,7 +21,9 @@ export type UseSignUpResponse = [
 ]
 
 export type UseSignUpOptions = {
-    redirectTo?: string
+    redirectTo?: string,
+    data?: object
+    captchaToken?: string
 }
 
 export type UseSignUpConfig = {
@@ -37,7 +39,7 @@ export function useSignUp(config: UseSignUpConfig = {}): UseSignUpResponse {
             setState({ ...initialState, fetching: true })
             const { error, session, user } = await client.auth.signUp(
                 credentials,
-                options ?? config.options,
+                options ?? config.options
             )
             const res = { error, session, user }
             setState({ ...res, fetching: false })

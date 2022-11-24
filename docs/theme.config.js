@@ -12,7 +12,7 @@ export default {
     defaultMenuCollapsed: true,
     darkMode: true,
     footer: true,
-    footerText: 'MIT 2020 © Tom Meagher.',
+    footerText: 'MIT 2022 © Tom Meagher.',
     footerEditOnGitHubLink: true,
     logo: <span>react-supabase</span>,
     head: (
